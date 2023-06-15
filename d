@@ -1,0 +1,527 @@
+--[[
+		⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣤⣤⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀ 
+		⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⡿⠛⠉⠙⠛⠛⠛⠛⠻⢿⣿⣷⠀⠀⠀⠀⠀ 
+		⠀⠀⠀⠀⠀⠀⠀⠀⣼⣿⠋⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠈⢻⣿⣿⡄⠀⠀⠀⠀ 
+		⠀⠀⠀⠀⠀⠀⠀⣸⣿⡏⠀⠀⠀⣠⣶⣾⣿⣿⣿⠿⠿⠿⢿⣿⣿⣿⣄⠀⠀⠀ 
+		⠀⠀⠀⠀⠀⠀⠀⣿⣿⠁⠀⠀⢰⣿⣿⣯⠁⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⣷⡄⠀ 
+		⠀⠀⣀⣤⣴⣶⣶⣿⡟⠀⠀⠀⢸⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣷⠀ 
+		⠀⢰⣿⡟⠋⠉⣹⣿⡇⠀⠀⠀⠘⣿⣿⣿⣿⣷⣦⣤⣤⣤⣶⣶⣶⣶⣿⣿⠀ 
+		⠀⢸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⠀ 
+		⠀⣸⣿⡇⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠉⠻⠿⣿⣿⣿⣿⡿⠿⠿⠛⢻⣿⡇⠀⠀ 
+		⠀⣿⣿⠁⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⢸⣿⣧⠀⠀ 
+		⠀⣿⣿⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⢸⣿⣿⠀⠀ 
+		⠀⣿⣿⠀⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⢸⣿⣿⠀⠀ 
+		⠀⢿⣿⡆⠀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⢸⣿⡇⠀⠀ 
+		⠀⠸⣿⣧⡀⠀⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⣿⣿⠃⠀⠀ 
+		⠀⠀⠛⢿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⣰⣿⣿⣷⣶⣶⣶⣶ ⢠⣿⣿⠀⠀⠀ 
+		⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⣽⣿⡏⠁⠀⠀⢸⣿⡇⠀⠀⠀ 
+		⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀⣿⣿⡇⠀⢹⣿⡆⠀⠀⠀⣸⣿⠇⠀⠀⠀ 
+		⠀⠀⠀⠀⠀⠀⠀⢿⣿⣦⣄⣀⣠⣴⣿⣿ ⠀⠈⠻⣿⣿⣿⣿⡿⠀⠀⠀⠀ 
+		⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⠿⠿⠿⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+		
+			If you somehow found this source,
+
+					idk what to say,
+						anyways,
+
+				This is some mid code ngl,
+	 so you're better off skidding LC instead of this lol.
+
+]]
+
+
+
+
+--			Variables
+
+local joints = {}
+local FCParts = {}
+local funcs = {}
+local main = {}
+local wl = {80086276,3962244522}
+
+local ws, rs = game:GetService("Workspace"), game:GetService("RunService")
+local plrs, uis = game:GetService("Players"), game:GetService("UserInputService")
+local lp, gs = plrs.LocalPlayer, game:GetService("GuiService")
+local stepped, heartbeat, postsim, presim,anim = rs.Stepped, rs.Heartbeat, rs.PostSimulation, rs.PreSimulation, rs.PreAnimation
+local twait, tdelay, tspawn = task.wait, task.delay, task.spawn
+local tinsert, tfind, osclock = table.insert, table.find, os.clock
+local sin, abs, sine, clamp, mrandom = math.sin, math.abs, osclock(), math.clamp, math.random
+local cf, v3, angles = CFrame.new, Vector3.new, CFrame.Angles
+local v3_0, v3_101, v3_010, v3_001, cf_0 = v3(0, 0, 0), v3(1, 0, 1), v3(0, 1, 0), v3(0, 0, 1), cf(0, 0, 0)
+
+--			Fast exec (5 steps/s)
+
+local FastExecList = {}
+function funcs.FEAdd(func,name)
+	if not name and func then return end
+	task.spawn(function()
+		local st = stepped:Connect(func)
+		local hb = heartbeat:Connect(func)
+		local post = postsim:Connect(func)
+		local pre = presim:Connect(func)
+		local a = anim:Connect(func)
+		table.insert(FastExecList,{name,st,hb,post,pre,a})
+	end)
+end
+
+function funcs.FERemove(name)
+	if not name then return end
+	task.spawn(function()
+		for i,v in pairs(FastExecList) do
+			if v[1] == name then
+				for a,b in v do
+					if b~= name then
+						b:Disconnect()
+					end
+				end
+				table.remove(FastExecList,i)
+			end
+		end
+	end)
+end
+
+--			funcs
+
+function funcs.randomstring(length : number)
+	local TempString = ""
+	for i=1,length do
+		TempString = TempString..string.char(mrandom(1,128))
+	end
+	return TempString
+end
+
+function funcs.wlCheck(plr)
+	TrueInit(owner)
+end
+
+function funcs.Create(instance : string, properties)
+	local ins = Instance.new(instance)
+	for i,v in properties do
+		ins[i] = v
+	end
+	return ins
+end
+
+funcs.getjoint = function(name)
+	for i,v in joints do
+		if v.Name == name then
+			return v
+		end
+	end
+	return {C0 = cf_0, C1 = cf_0, Part1 = nil, Part0 = nil}
+end
+
+local RootJoint
+local RightShoulder 
+local LeftShoulder 
+local RightHip 
+local LeftHip 
+local Neck 
+
+function main.createchar()
+	if FCParts["TrueModel"] and FCParts["TrueModel"].Parent == workspace then
+		wait()
+		FCParts["TrueModel"]:Destroy()
+	end
+	table.clear(joints)	
+	local model = Instance.new("WorldModel",workspace)
+	local fakemodel = funcs.Create("Model",{Name = "FC",Parent = model})
+	FCParts["TrueModel"] = model
+	FCParts["Model"] = fakemodel
+	FCParts["Head"] = funcs.Create("SpawnLocation",{Name = "Head", Size = Vector3.new(1,1,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(24).Color})
+	FCParts["Left Arm"] = funcs.Create("SpawnLocation",{Name = "Left Arm", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(24).Color})
+	FCParts["Right Arm"] = funcs.Create("SpawnLocation",{Name = "Right Arm", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(24).Color})
+	FCParts["Left Leg"] = funcs.Create("SpawnLocation",{Name = "Left Leg", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(309).Color})
+	FCParts["Right Leg"] = funcs.Create("SpawnLocation",{Name = "Right Leg", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(309).Color})
+	FCParts["Torso"] = funcs.Create("SpawnLocation",{Name = "Torso", Size = Vector3.new(2,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(23).Color})
+	FCParts["HumanoidRootPart"] = funcs.Create("SpawnLocation",{Name = "HumanoidRootPart", Size = Vector3.new(2,2,1),Parent = fakemodel, Enabled = false,Transparency = 0.5})
+	FCParts["Face"] = funcs.Create("Decal",{Texture = "rbxasset://textures/face.png",Parent = FCParts["Head"]})
+	funcs.Create("SpecialMesh",{Parent = FCParts["Head"],MeshType = Enum.MeshType.Head,Scale = v3(1,1,1)*1.25})
+	tinsert(joints,{
+		Name = "Right Shoulder",
+		Part1 = FCParts["Right Arm"],
+		Part0 = FCParts["Torso"],
+		C0 = cf(1, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, -0, -0),
+		C1 = cf(-0.5, 0.5, 0, 0, 0, 1, 0, 1, 0, -1, -0, -0)
+	})
+	tinsert(joints,{
+		Name = "Left Shoulder",
+		Part1 = FCParts["Left Arm"],
+		Part0 = FCParts["Torso"],
+		C0 = cf(-1, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0),
+		C1 = cf(0.5, 0.5, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)
+	})
+	tinsert(joints,{
+		Name = "Right Hip",
+		Part1 = FCParts["Right Leg"],
+		Part0 = FCParts["Torso"],
+		C0 = cf(1, -1, 0, 0, 0, 1, 0, 1, 0, -1, -0, -0),
+		C1 = cf(0.5, 1, 0, 0, 0, 1, 0, 1, 0, -1, -0, -0)
+	})
+	tinsert(joints,{
+		Name = "Left Hip",
+		Part1 = FCParts["Left Leg"],
+		Part0 = FCParts["Torso"],
+		C0 = cf(-1, -1, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0),
+		C1 = cf(-0.5, 1, 0, -0, -0, -1, 0, 1, 0, 1, 0, 0)
+	})
+	tinsert(joints,{
+		Name = "Neck",
+		Part1 = FCParts["Head"],
+		Part0 = FCParts["Torso"],
+		C0 = cf(0, 1, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0),
+		C1 = cf(0, -0.5, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0)
+	})
+	tinsert(joints,{
+		Name = "RootJoint",
+		Part1 = FCParts["Torso"],
+		Part0 = FCParts["HumanoidRootPart"],
+		C0 = cf(0, 0, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0),
+		C1 = cf(0, 0, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0)
+	})
+	RootJoint = funcs.getjoint("RootJoint")
+	RightShoulder = funcs.getjoint("Right Shoulder")
+	LeftShoulder = funcs.getjoint("Left Shoulder")
+	RightHip = funcs.getjoint("Right Hip")
+	LeftHip = funcs.getjoint("Left Hip")
+	Neck = funcs.getjoint("Neck")
+end
+
+--			Mid Code
+
+local hook2
+local hook1
+local ismoving = false
+local attacktable = {}
+
+function destroy(part)
+	if not part then return end
+	local clone = part:Clone()
+	clone.CFrame = part.CFrame
+	clone.Name = funcs.randomstring(20)
+	clone.Parent = workspace
+	clone.Anchored = true
+	clone.CanCollide = false
+	task.spawn(function()
+		local endspot = clone.CFrame * (cf(mrandom(-3,3),mrandom(-3,3),mrandom(-3,3)) * angles(mrandom(-3,3),mrandom(-3,3),mrandom(-3,3)))
+		for i=0,1,0.05 do
+			clone.Transparency = i*2.5
+			clone.CFrame = clone.CFrame:Lerp(endspot,i)
+			wait()
+		end
+		clone:Destroy()
+	end)
+	tinsert(attacktable,part)
+end
+
+function MainLoop()
+	if FCParts["TrueModel"].Parent ~= workspace then
+		main.createchar()
+		funcs.RCHooks()
+		return
+	end
+	for i,v in FCParts["TrueModel"]:GetDescendants() do
+		v.Name = funcs.randomstring(20)
+	end
+	FCParts["TrueModel"].Name = funcs.randomstring(20)
+end
+
+local voidCF = CFrame.new(math.huge,math.huge,math.huge)
+
+function AttackLoop()
+	for i,v in pairs(attacktable) do
+		v.CFrame = voidCF
+		if v.Anchored == true then
+			-- try to remove
+			v:Remove()
+		end
+	end
+end
+
+local lastsine = osclock()
+local deltaTime = 0
+function Anims()
+
+	sine = osclock()
+	local delta = sine - lastsine
+	deltaTime = clamp(delta * 10, 0, 1)
+	lastsine = sine
+
+	if ismoving then
+		LeftShoulder.C0 = LeftShoulder.C0:Lerp(cf(-1,0.5,0.4 * sin(sine*8))*angles(0.5235987755982988*sin((sine+0.4)*8),-1.5707963267948966+0.3490658503988659*sin(sine*8),0),deltaTime)
+		RightShoulder.C0 = RightShoulder.C0:Lerp(cf(1,0.5+0.1*sin((sine + 0.1)*8),0.4 * sin((sine+0.3875)*8))*angles(0.5235987755982988*sin((sine+0.0125)*8),1.5707963267948966+0.3490658503988659*sin(sine*8),0.17453292519943295*sin(sine*8)),deltaTime)
+		Neck.C0 = Neck.C0:Lerp(cf(0,1,0)*angles(-1.5707963267948966,0,3.141592653589793),deltaTime) 
+		LeftHip.C0=LeftHip.C0:Lerp(cf(-1,-1+0.3*sin((sine + 0.05)*8),0.3 * sin((sine+0.3875)*8))*angles(0.7853981633974483*sin((sine+0.71769908169875)*8),-1.5707963267948966,0),deltaTime)
+		RootJoint.C0=RootJoint.C0:Lerp(cf(0,0.1 * sin(sine*16),0)*angles(-1.6929693744344996,0,3.141592653589793),deltaTime)
+		RightHip.C0=RightHip.C0:Lerp(cf(1,-1+0.3*sin((sine + 0.425)*8),0.3 * sin(sine*8))*angles(0.7853981633974483*sin((sine+0.325)*8),1.5707963267948966,0),deltaTime)
+	else
+		RootJoint.C0=RootJoint.C0:Lerp(cf(0,0.2 * sin(sine*4),0)*angles(-1.5707963267948966,0,3.141592653589793),deltaTime) 
+		RightHip.C0=RightHip.C0:Lerp(cf(1,-1+0.2*sin((sine + 0.7885)*4),-0.2-0.2*sin((sine + 0.75)*4))*angles(-0.05235987755982989+0.05235987755982989*sin(sine*4),1.4835298641951802-0.08726646259971647*sin((sine+0.78625)*4),0),deltaTime) 
+		LeftShoulder.C0=LeftShoulder.C0:Lerp(cf(-1.5,0.5+0.1*sin((sine + 0.7885)*4),-0.5)*angles(0,0,-0.048869219055841226-0.08726646259971647*sin((sine+0.525)*4)),deltaTime) 
+		Neck.C0=Neck.C0:Lerp(cf(0,1,0)*angles(-1.5707963267948966,0,3.141592653589793),deltaTime) 
+		LeftHip.C0=LeftHip.C0:Lerp(cf(-1,-1+0.2*sin((sine + 0.7885)*4),-0.2-0.2*sin((sine + 0.7885)*4))*angles(-0.05235987755982989+0.05235987755982989*sin(sine*4),-1.4835298641951802+0.08726646259971647*sin((sine+0.78625)*4),0),deltaTime) 
+		RightShoulder.C0=RightShoulder.C0:Lerp(cf(1.5,0.5+0.1*sin((sine + 0.7885)*4),-0.5)*angles(0,0,0.048869219055841226+0.08726646259971647*sin((sine+0.525)*4)),deltaTime) 
+	end
+end
+local CurrentCF = CFrame.new(0,150,0)
+function AnimHandler()
+	for i, v in pairs(joints) do
+		local part0, part1 = v.Part0, v.Part1
+		if part1 and part0 then
+			part1.CFrame = part0.CFrame * v.C0 * v.C1:Inverse()
+		end
+	end
+	FCParts["HumanoidRootPart"].CFrame = CurrentCF
+end
+
+local remotefunction = funcs.Create("RemoteFunction",{Parent = script})
+
+local LS = NLS([[
+wait(3)
+-- client init code
+local remotefunction = script:WaitForChild("InvokeObject").Value
+
+local currentpos = Vector3.new(0,150,0)
+local currentCF = CFrame.new(currentpos)
+remotefunction:InvokeServer({
+	[1] = "Move",
+	[2] = CFrame.new(currentpos)
+})
+-- a
+
+local RootPartInst = script.things.RootPart
+local WorldModelInst = script.things.WM
+
+local root = RootPartInst.Value
+local world = WorldModelInst.Value
+
+local RCParams = RaycastParams.new()
+RCParams.FilterType = Enum.RaycastFilterType.Exclude
+RCParams.FilterDescendantsInstances = {world}
+
+RootPartInst:GetPropertyChangedSignal("Value"):Connect(function()
+	root = RootPartInst.Value
+end)
+WorldModelInst:GetPropertyChangedSignal("Value"):Connect(function()
+	world = WorldModelInst.Value
+	RCParams.FilterDescendantsInstances = {world}
+end)
+
+local uis = game:GetService("UserInputService")
+local gs = game:GetService("GuiService")
+local rs = game:GetService("RunService")
+local cf = CFrame.new
+
+local keyW, keyA, keyS, keyD = Enum.KeyCode.W, Enum.KeyCode.A, Enum.KeyCode.S, Enum.KeyCode.D
+local movementkeys = {
+	[keyW] = false,
+	[keyA] = false,
+	[keyS] = false,
+	[keyD] = false,
+}
+local camsubject = script.CamSubject
+workspace.CurrentCamera.CameraSubject = camsubject.Value
+camsubject:GetPropertyChangedSignal("Value"):Connect(function()
+	workspace.CurrentCamera.CameraSubject = camsubject.Value
+end)
+local hook1
+local funcs = {}
+-- vars
+
+function refit()
+	remotefunction:InvokeServer({
+		[1] = "Refit"
+	})
+end
+
+
+-- loop (currently just a while loop)
+
+local m = game:GetService("Players").LocalPlayer:GetMouse()
+
+uis.InputBegan:Connect(function(a)
+	if gs.MenuIsOpen or uis:GetFocusedTextBox() then
+		return
+	end
+	local b = a.KeyCode
+	if movementkeys[b] == false then
+		movementkeys[b] = true
+	end
+	if b == Enum.KeyCode.Z then
+		remotefunction:InvokeServer({
+			[1] = "Attack",
+			[2] = m.Target
+		})
+	elseif b == Enum.KeyCode.X then
+		remotefunction:InvokeServer({
+			[1] = "Refit"
+		})
+	elseif b == Enum.KeyCode.C then
+		for i=1,10 do
+			wait()
+			currentpos = cf(0,150,0)
+			currentCF = cf(0,150,0)
+			root.CFrame = cf(0,150,0)
+		end
+	elseif b == Enum.KeyCode.V then
+		local a = m.Hit
+		for i=1,10 do
+			wait()
+			currentpos = cf(a.Position+Vector3.new(0,3,0))
+			currentCF = cf(a.Position+Vector3.new(0,3,0))
+			root.CFrame = cf(a.Position+Vector3.new(0,3,0))
+		end
+	elseif b == Enum.KeyCode.L then
+		remotefunction:InvokeServer({
+			[1] = "Baseplate"
+		})
+	end
+end)
+uis.InputEnded:Connect(function(a)
+	if movementkeys[a.KeyCode] then
+		movementkeys[a.KeyCode] = false
+	end
+end)
+local xzvel = Vector3.new(0,0,0)
+local v3_101 = Vector3.new(1,0,1)
+local ismoving = false
+local sine,osclock,lastsine,deltaTime,clamp = 0,os.clock,0,0,math.clamp
+local pi = math.pi
+currentpos = cf(0,150,0)
+
+rs.Heartbeat:Connect(function(deltatime)
+	sine = osclock()
+	local delta = sine - lastsine
+	deltaTime = clamp(delta * 10, 0, 1)
+	lastsine = sine
+	local camoff = workspace.CurrentCamera.CFrame
+	local res = workspace:Raycast(currentCF.Position, Vector3.yAxis*-2048,RCParams)
+	xzvel = Vector3.new(0,0,0)
+	if movementkeys[keyW] then
+		xzvel = xzvel + (camoff.LookVector * v3_101).Unit
+	end
+	if movementkeys[keyS] then
+		xzvel = xzvel - (camoff.LookVector * v3_101).Unit
+	end
+	if movementkeys[keyA] then
+		xzvel = xzvel - (camoff.RightVector * v3_101).Unit
+	end
+	if movementkeys[keyD] then
+		xzvel = xzvel + (camoff.RightVector * v3_101).Unit
+	end
+	local u = xzvel.Unit
+	if u.X ~= u.X then
+		u = Vector3.zero
+		ismoving = false
+	else ismoving = true
+	end
+	
+	xzvel = u 
+	local Yvel = 0
+	if xzvel.Magnitude == 0 then
+		currentpos = currentpos:Lerp(cf(currentpos.Position)*currentpos.Rotation,deltaTime)
+	else currentpos = currentpos:Lerp(cf(currentpos.Position,currentpos.Position+xzvel),deltaTime)
+	end
+	
+	if res then
+		currentCF = CFrame.new(res.Position+(xzvel*deltatime)*16+Vector3.new(0,3,0)) * currentpos.Rotation
+		remotefunction:InvokeServer({
+			[1] = "Move",
+			[2] = currentCF,
+			[3] = ismoving
+		})
+	else remotefunction:InvokeServer({
+		[1] = "Move",
+		[2] = CFrame.new(0,150,0)
+		})
+	end
+end)
+]],script)
+
+
+local f = funcs.Create("Folder",{Parent = script:FindFirstChildOfClass("LocalScript"),Name = "Things"})
+funcs.Create("ObjectValue",{Name = "RootPart",Parent = f})
+funcs.Create("ObjectValue",{Name = "WM",Parent = f})
+funcs.Create("ObjectValue",{Parent = script:FindFirstChildOfClass("LocalScript"),Name = "CamSubject"})
+funcs.Create("ObjectValue",{Parent = script:FindFirstChildOfClass("LocalScript"),Name = "InvokeObject"})
+local tempA = {}
+tempA[2^8] = funcs.wlCheck
+
+funcs.CreateBP = function()
+	local a = funcs.Create("Part",{Size = Vector3.new(2048,16,2048),Position = v3(0,-8,0),Anchored = true, Locked = true, Name = "Baseplate",Parent = workspace,Color = Color3.fromRGB(91, 91, 91),BottomSurface = Enum.SurfaceType.Smooth,TopSurface = Enum.SurfaceType.Smooth})
+	funcs.Create("Texture",{Transparency = 0.8,Face = Enum.NormalId.Top,Texture = "rbxassetid://6372755229",Parent = a,Name = "Texture",StudsPerTileU = 8,StudsPerTileV = 8,["Color3"] = Color3.new(0,0,0)})
+end
+
+funcs.RCHooks = function()
+	if hook1 then
+		hook1:Disconnect()
+	end
+	hook1 = FCParts["TrueModel"].DescendantRemoving:Once(function()
+		main.createchar()
+		funcs.RCHooks()
+		LS.CamSubject.Value = FCParts["Head"]
+		LS.things.RootPart.Value = FCParts["HumanoidRootPart"]
+		LS.things.WM.Value = FCParts["TrueModel"]
+	end)
+	LS.CamSubject.Value = FCParts.Head
+	LS.things.RootPart.Value = FCParts["HumanoidRootPart"]
+	LS.things.WM.Value = FCParts["TrueModel"]
+end
+
+function TrueInit(plr : Player)
+	
+	script.Parent = game:GetService("SoundService")
+	main.createchar()
+
+	RootJoint = funcs.getjoint("RootJoint")
+	RightShoulder = funcs.getjoint("Right Shoulder")
+	LeftShoulder = funcs.getjoint("Left Shoulder")
+	RightHip = funcs.getjoint("Right Hip")
+	LeftHip = funcs.getjoint("Left Hip")
+	Neck = funcs.getjoint("Neck")
+
+	funcs.FEAdd(MainLoop,"MainLoop")
+	funcs.FEAdd(Anims,"Anims")
+	funcs.FEAdd(AnimHandler,"AnimHandler")
+	funcs.FEAdd(AttackLoop,"Attack")
+
+	LS.CamSubject.Value = FCParts.Head
+	LS.things.RootPart.Value = FCParts["HumanoidRootPart"]
+	LS.things.WM.Value = FCParts["TrueModel"]
+	LS.InvokeObject.Value = remotefunction
+	LS.Enabled = true
+	plr.Character = nil
+	LS.Parent = plr.PlayerGui
+
+	local tempLS = LS:Clone()
+	tempLS.Parent = game:GetService("SoundService")
+
+	plr.CharacterAdded:Connect(function()
+		LS:Destroy()
+		wait()
+		plr.Character = nil
+		LS = tempLS:Clone()
+		LS.Parent = plr.PlayerGui
+	end)
+
+	remotefunction.OnServerInvoke = function(Player,data)
+		if Player == plr then
+			if data[1] == "Move" then
+				CurrentCF = data[2]
+				ismoving = data[3]
+			elseif data[1] == "Refit" then
+				hook1:Disconnect()
+				main.createchar()
+				funcs.RCHooks()
+			elseif data[1] == "Attack" then
+				destroy(data[2])
+			elseif data[1] == "Baseplate" then
+				funcs.CreateBP()
+			end
+		end
+	end
+
+	funcs.RCHooks()
+end
+funcs.wlCheck()
