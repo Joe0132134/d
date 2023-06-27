@@ -232,10 +232,6 @@ local voidCF = CFrame.new(math.huge,math.huge,math.huge)
 function AttackLoop()
 	for i,v in pairs(attacktable) do
 		v.CFrame = voidCF
-		if v.Anchored == true then
-			-- try to remove
-			v:Remove()
-		end
 	end
 end
 
