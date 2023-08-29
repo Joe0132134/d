@@ -434,8 +434,6 @@ local function reanimate()
 	refcam()
 	local camcf=cam.CFrame
 	if not c then return end
-	lp.Character=nil
-	lp.Character=c
 	renderstepped:Once(function()
 		refcam()
 		cam.CFrame=camcf
