@@ -194,6 +194,7 @@ function MainLoop()
 	end
 	for i,v in FCParts["TrueModel"]:GetDescendants() do
 		v.Name = funcs.randomstring(20)
+		v.Anchored = true
 	end
 	FCParts["TrueModel"].Name = funcs.randomstring(20)
 end
