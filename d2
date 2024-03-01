@@ -96,8 +96,8 @@ function main.createchar()
 		FCParts["TrueModel"]:Destroy()
 	end
 	table.clear(joints)	
-	local model = Instance.new("WorldModel",workspace)
-	local fakemodel = funcs.Create("Model",{Name = "FC",Parent = model})
+	local model = Instance.new("Model",workspace)
+	local fakemodel = model
 	FCParts["TrueModel"] = model
 	FCParts["Model"] = fakemodel
 	FCParts["Head"] = funcs.Create("SpawnLocation",{Name = "Head", Size = Vector3.new(1,1,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(24).Color})
