@@ -100,13 +100,13 @@ function main.createchar()
 	local fakemodel = model
 	FCParts["TrueModel"] = model
 	FCParts["Model"] = fakemodel
-	FCParts["Head"] = funcs.Create("SpawnLocation",{Name = "Head", Size = Vector3.new(1,1,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(24).Color})
-	FCParts["Left Arm"] = funcs.Create("SpawnLocation",{Name = "Left Arm", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(24).Color})
-	FCParts["Right Arm"] = funcs.Create("SpawnLocation",{Name = "Right Arm", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(24).Color})
-	FCParts["Left Leg"] = funcs.Create("SpawnLocation",{Name = "Left Leg", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(309).Color})
-	FCParts["Right Leg"] = funcs.Create("SpawnLocation",{Name = "Right Leg", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(309).Color})
-	FCParts["Torso"] = funcs.Create("SpawnLocation",{Name = "Torso", Size = Vector3.new(2,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(23).Color})
-	FCParts["HumanoidRootPart"] = funcs.Create("SpawnLocation",{Name = "HumanoidRootPart", Size = Vector3.new(2,2,1),Parent = fakemodel, Enabled = false,Transparency = 0.5})
+	FCParts["Head"] = funcs.Create("SpawnLocation",{Name = "Head", Size = Vector3.new(1,1,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(24).Color,Anchored = true})
+	FCParts["Left Arm"] = funcs.Create("SpawnLocation",{Name = "Left Arm", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(24).Color,Anchored = true})
+	FCParts["Right Arm"] = funcs.Create("SpawnLocation",{Name = "Right Arm", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(24).Color,Anchored = true})
+	FCParts["Left Leg"] = funcs.Create("SpawnLocation",{Name = "Left Leg", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(309).Color,Anchored = true})
+	FCParts["Right Leg"] = funcs.Create("SpawnLocation",{Name = "Right Leg", Size = Vector3.new(1,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(309).Color,Anchored = true})
+	FCParts["Torso"] = funcs.Create("SpawnLocation",{Name = "Torso", Size = Vector3.new(2,2,1),Parent = fakemodel, Enabled = false,Color = BrickColor.new(23).Color,Anchored = true})
+	FCParts["HumanoidRootPart"] = funcs.Create("SpawnLocation",{Name = "HumanoidRootPart", Size = Vector3.new(2,2,1),Parent = fakemodel, Enabled = false,Transparency = 0.5,Anchored = true})
 	FCParts["Face"] = funcs.Create("Decal",{Texture = "rbxasset://textures/face.png",Parent = FCParts["Head"]})
 	funcs.Create("SpecialMesh",{Parent = FCParts["Head"],MeshType = Enum.MeshType.Head,Scale = v3(1,1,1)*1.25})
 	tinsert(joints,{
